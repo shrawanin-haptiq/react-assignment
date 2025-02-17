@@ -10,8 +10,8 @@ const Counter = () => {
   }, [count]);
 
   return (
-    <div className="flex  justify-center">
-      <h1 className="headingCounter text-3xl">Counter App</h1>
+    <div className="flex justify-center">
+      <h1 className="headingCounter text-4xl">Counter App</h1>
       <CounterDisplay count={count} />
       <CounterButtons setCount={setCount} />
     </div>
