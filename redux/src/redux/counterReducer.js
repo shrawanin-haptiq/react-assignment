@@ -1,17 +1,30 @@
 import { INCREMENT, DECREMENT, RESET } from "./actions";
 
 const initialState = {
-  count: 0
+  count: parseInt(localStorage.getItem('count')) || 0,   
 };
 
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT:
-      return { ...state, count: state.count + 1 };
+      const incrementedState = { ...state, count: state.count + 1 };
+      localStorage.setItem('count', incrementedState.count);  
+      return incrementedState;
+
     case DECREMENT:
-      return { ...state, count: state.count - 1 };
+      // Ensure count doesn't go below 0
+      const decrementedState = { 
+        ...state, 
+        count: state.count > 0 ? state.count - 1 : 0 
+      };
+      localStorage.setItem('count', decrementedState.count);   
+      return decrementedState;
+
     case RESET:
-      return { ...state, count: 0 };
+      const resetState = { ...state, count: 0 };
+      localStorage.setItem('count', 0);   
+      return resetState;
+
     default:
       return state;
   }
